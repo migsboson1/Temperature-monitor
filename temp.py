@@ -17,29 +17,29 @@ x=list()
 y=list()
 i=0
 
-# to execute code, open terminal and write: python file name
+
 ser = serial.Serial(strPort2, 9600) # Connects arduino port to python
 ser.close() # closes the port
 ser.open() # re-opens the port
 
-def makefig1(): # Defined a function that has the subplot of different voltage values
-    fig1,axes = plt.subplots(16, 1,figsize = (20, 28),sharex = True) # we can change the plot number by changing the first value in the suplot function
+def makefig1(): # we can change the plot number by changing the first value in the suplot function
+    fig1,axes = plt.subplots(16, 1,figsize = (20, 28),sharex = True) 
     for i, ax in enumerate(axes): # loop through each element in axes while keeping track of iteration through enumerate
         ax.plot(v_plot[i], 'o')
     fig1.suptitle('Temperature Monitor', size=(15))
 
-v_plot = [list() for _ in range(16)] #created an empty list for each value we shall plot
+v_plot = [list() for _ in range(16)] 
 
-while True:  # using while loop to keep the plot running
+while True:  
     while (ser.inWaiting()==0): # waits for data to come in from the port
-        pass # does nothing
+        pass 
 
-    data = ser.readline() # The serial values from the arduino serial monitor are defined as data
+    data = ser.readline() 
     raw_data = data.decode()  # The decode function decodes the values coming from the arduino into readable data
     raw = raw_data.strip() # I stripped any unwanted strings from the list
     v_read = raw.split()    #split the value at each seperator, in this case the spaces between each value
-    for _, v in enumerate(v_read):    #for-loop that loops through the split data
-        v_plot[_].append(float(v))     # appends the data value to the variable v_plot
+    for _, v in enumerate(v_read):    #loop through the split data
+        v_plot[_].append(float(v))     # appends data value to the variable v_plot
 
     print(v_plot)
     drawnow(makefig1) # plots the updated figure
