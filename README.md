@@ -1,1 +1,1 @@
-# Temperature-monitor Real time data acquisition of temperatures from a number of devices.
+# Real time data acquisition of various temperatures.
