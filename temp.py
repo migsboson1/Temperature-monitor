@@ -4,10 +4,6 @@ import serial
 import sys, argparse
 import matplotlib.animation as animation
 from drawnow import drawnow
-# web_dir =
-
-# from time import sleep
-# from collections import deque
 
 strPort1 = '/dev/cu.usbmodem1411' # define the port that connects arduino to computer.
 strPort2 = '/dev/cu.usbmodem1421'
@@ -19,8 +15,8 @@ i=0
 
 
 ser = serial.Serial(strPort2, 9600) # Connects arduino port to python
-ser.close() # closes the port
-ser.open() # re-opens the port
+ser.close() 
+ser.open() 
 
 def makefig1(): # we can change the plot number by changing the first value in the suplot function
     fig1,axes = plt.subplots(16, 1,figsize = (20, 28),sharex = True) 
@@ -46,7 +42,4 @@ while True:
     x.append(i)
     i += 1
     plt.pause(3) #pauses the plot at given value(in seconds)
-#     for _ in v_plot:
-#         if (i>50):
-#             v_plot[_].pop(0)
     plt.savefig('makefig1.png')
